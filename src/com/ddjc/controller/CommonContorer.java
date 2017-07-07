@@ -31,9 +31,7 @@ public class CommonContorer {
         app.setCode(0);
         app.setMsg("²Ù×÷³É¹¦");
         app.setData(list);   ////    
-        
         return app;
-        
 	}
 	
 	@ResponseBody
