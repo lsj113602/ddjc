@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddjc.dao.WarninguntreatedMapper" >
+  <resultMap id="BaseResultMap" type="com.ddjc.entity.Warninguntreated" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="receiveTime" property="receivetime" jdbcType="TIMESTAMP" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="behavior" property="behavior" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="TINYINT" />
+    <result column="warningId" property="warningid" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BaseResultModelMap" type="com.ddjc.entity.appmodel.WarningModel" >
+    <id column="warningId" property="id" jdbcType="VARCHAR" />
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="behavior" property="behavior" jdbcType="VARCHAR" />
+    <result column="receiveTime" property="receiveTime" jdbcType="TIMESTAMP" />
+    <result column="source" property="source" jdbcType="TINYINT" />
+  </resultMap>
+  
+  
+  <sql id="Base_ColumnModel_List" >
+    wu.warningId as warningId, u.userName as userName, wu.longitude as longitude,
+     wu.latitude as latitude,wu.behavior as behavior,wu.receiveTime as receiveTime,
+     wu.source as source
+  </sql>
+
+  <sql id="Base_Column_List" >
+    id, receiveTime, address, userId, longitude, latitude, behavior, remarks, source, 
+    warningId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from WarningUntreated
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from WarningUntreated
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ddjc.entity.Warninguntreated" >
+    insert into WarningUntreated (id, receiveTime, address, 
+      userId, longitude, latitude, 
+      behavior, remarks, source, 
+      warningId)
+    values (#{id,jdbcType=VARCHAR}, #{receivetime,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{behavior,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{source,jdbcType=TINYINT}, 
+      #{warningid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddjc.entity.Warninguntreated" >
+    insert into WarningUntreated
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="receivetime != null" >
+        receiveTime,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="behavior != null" >
+        behavior,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="warningid != null" >
+        warningId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="receivetime != null" >
+        #{receivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="behavior != null" >
+        #{behavior,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=TINYINT},
+      </if>
+      <if test="warningid != null" >
+        #{warningid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddjc.entity.Warninguntreated" >
+    update WarningUntreated
+    <set >
+      <if test="receivetime != null" >
+        receiveTime = #{receivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="behavior != null" >
+        behavior = #{behavior,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=TINYINT},
+      </if>
+      <if test="warningid != null" >
+        warningId = #{warningid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddjc.entity.Warninguntreated" >
+    update WarningUntreated
+    set receiveTime = #{receivetime,jdbcType=TIMESTAMP},
+      address = #{address,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      behavior = #{behavior,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      source = #{source,jdbcType=TINYINT},
+      warningId = #{warningid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="findWarningByNurse" resultMap="BaseResultModelMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_ColumnModel_List" />
+    from WarningUntreated wu,NurseUser nu,User u
+    where nu.nurseId = #{id} and nu.userId=wu.userId and wu.userId=u.id
+  </select>
+  
+  <select id="findWarningByUser" resultMap="BaseResultModelMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_ColumnModel_List" />
+    from WarningUntreated wu,UserFriend uf,User u
+    where uf.userId = #{id} and uf.friendId=wu.userId and wu.userId=u.id
+  </select>
+  
+  <update id="updateRemarks" parameterType="java.util.Map" >
+    update WarningUntreated
+    set remarks = #{remarks}
+    where warningId = #{id}
+  </update>
+  
+  <delete id="deleteBywarnId" parameterType="java.lang.String" >
+    delete from WarningUntreated
+    where warningId = #{id}
+  </delete>
+</mapper>

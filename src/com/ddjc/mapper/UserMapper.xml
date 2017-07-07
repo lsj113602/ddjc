@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddjc.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.ddjc.entity.User" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="userCode" property="usercode" jdbcType="VARCHAR" />
+    <result column="userPhone" property="userphone" jdbcType="VARCHAR" />
+    <result column="userEmail" property="useremail" jdbcType="VARCHAR" />
+    <result column="isView" property="isview" jdbcType="TINYINT" />
+    <result column="userJob" property="userjob" jdbcType="VARCHAR" />
+    <result column="userLogo" property="userlogo" jdbcType="VARCHAR" />
+    <result column="userBirthday" property="userbirthday" jdbcType="TIMESTAMP" />
+    <result column="deleteMark" property="deletemark" jdbcType="TINYINT" />
+    <result column="usersex" property="usersex" jdbcType="TINYINT" />
+    <result column="userPassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="userType" property="usertype" jdbcType="TINYINT" />
+    <result column="userQrcode" property="userqrcode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userName, userCode, userPhone, userEmail, isView, userJob, userLogo, userBirthday, 
+    deleteMark, usersex, userPassword, userType, userQrcode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from User
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from User
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ddjc.entity.User" >
+    insert into User (id, userName, userCode, 
+      userPhone, userEmail, isView, 
+      userJob, userLogo, userBirthday, 
+      deleteMark, usersex, userPassword, 
+      userType, userQrcode)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{usercode,jdbcType=VARCHAR}, 
+      #{userphone,jdbcType=VARCHAR}, #{useremail,jdbcType=VARCHAR}, #{isview,jdbcType=TINYINT}, 
+      #{userjob,jdbcType=VARCHAR}, #{userlogo,jdbcType=VARCHAR}, #{userbirthday,jdbcType=TIMESTAMP}, 
+      #{deletemark,jdbcType=TINYINT}, #{usersex,jdbcType=TINYINT}, #{userpassword,jdbcType=VARCHAR}, 
+      #{usertype,jdbcType=TINYINT}, #{userqrcode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddjc.entity.User" >
+    insert into User
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="usercode != null" >
+        userCode,
+      </if>
+      <if test="userphone != null" >
+        userPhone,
+      </if>
+      <if test="useremail != null" >
+        userEmail,
+      </if>
+      <if test="isview != null" >
+        isView,
+      </if>
+      <if test="userjob != null" >
+        userJob,
+      </if>
+      <if test="userlogo != null" >
+        userLogo,
+      </if>
+      <if test="userbirthday != null" >
+        userBirthday,
+      </if>
+      <if test="deletemark != null" >
+        deleteMark,
+      </if>
+      <if test="usersex != null" >
+        usersex,
+      </if>
+      <if test="userpassword != null" >
+        userPassword,
+      </if>
+      <if test="usertype != null" >
+        userType,
+      </if>
+      <if test="userqrcode != null" >
+        userQrcode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usercode != null" >
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null" >
+        #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="isview != null" >
+        #{isview,jdbcType=TINYINT},
+      </if>
+      <if test="userjob != null" >
+        #{userjob,jdbcType=VARCHAR},
+      </if>
+      <if test="userlogo != null" >
+        #{userlogo,jdbcType=VARCHAR},
+      </if>
+      <if test="userbirthday != null" >
+        #{userbirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletemark != null" >
+        #{deletemark,jdbcType=TINYINT},
+      </if>
+      <if test="usersex != null" >
+        #{usersex,jdbcType=TINYINT},
+      </if>
+      <if test="userpassword != null" >
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=TINYINT},
+      </if>
+      <if test="userqrcode != null" >
+        #{userqrcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddjc.entity.User" >
+    update User
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usercode != null" >
+        userCode = #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        userPhone = #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null" >
+        userEmail = #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="isview != null" >
+        isView = #{isview,jdbcType=TINYINT},
+      </if>
+      <if test="userjob != null" >
+        userJob = #{userjob,jdbcType=VARCHAR},
+      </if>
+      <if test="userlogo != null" >
+        userLogo = #{userlogo,jdbcType=VARCHAR},
+      </if>
+      <if test="userbirthday != null" >
+        userBirthday = #{userbirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletemark != null" >
+        deleteMark = #{deletemark,jdbcType=TINYINT},
+      </if>
+      <if test="usersex != null" >
+        usersex = #{usersex,jdbcType=TINYINT},
+      </if>
+      <if test="userpassword != null" >
+        userPassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        userType = #{usertype,jdbcType=TINYINT},
+      </if>
+      <if test="userqrcode != null" >
+        userQrcode = #{userqrcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddjc.entity.User" >
+    update User
+    set userName = #{username,jdbcType=VARCHAR},
+      userCode = #{usercode,jdbcType=VARCHAR},
+      userPhone = #{userphone,jdbcType=VARCHAR},
+      userEmail = #{useremail,jdbcType=VARCHAR},
+      isView = #{isview,jdbcType=TINYINT},
+      userJob = #{userjob,jdbcType=VARCHAR},
+      userLogo = #{userlogo,jdbcType=VARCHAR},
+      userBirthday = #{userbirthday,jdbcType=TIMESTAMP},
+      deleteMark = #{deletemark,jdbcType=TINYINT},
+      usersex = #{usersex,jdbcType=TINYINT},
+      userPassword = #{userpassword,jdbcType=VARCHAR},
+      userType = #{usertype,jdbcType=TINYINT},
+      userQrcode = #{userqrcode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="login" resultMap="BaseResultMap" parameterType="com.ddjc.entity.User" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userCode = #{usercode} and userPassword=#{userpassword}
+  </select>
+  
+   <select id="findUserBycode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from User
+    where userCode = #{usercode,jdbcType=VARCHAR}
+  </select>
+</mapper>

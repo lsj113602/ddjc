@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddjc.dao.DatabraceletMapper" >
+  <resultMap id="BaseResultMap" type="com.ddjc.entity.Databracelet" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="deviceId" property="deviceid" jdbcType="VARCHAR" />
+    <result column="deleteMark" property="deletemark" jdbcType="TINYINT" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="steps" property="steps" jdbcType="VARCHAR" />
+    <result column="distance" property="distance" jdbcType="VARCHAR" />
+    <result column="calorie" property="calorie" jdbcType="VARCHAR" />
+    <result column="heartRate" property="heartrate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, deviceId, deleteMark, startTime, endTime, steps, distance, calorie, heartRate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DataBracelet
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DataBracelet
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ddjc.entity.Databracelet" >
+    insert into DataBracelet (id, deviceId, deleteMark, 
+      startTime, endTime, steps, 
+      distance, calorie, heartRate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{deviceid,jdbcType=VARCHAR}, #{deletemark,jdbcType=TINYINT}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{steps,jdbcType=VARCHAR}, 
+      #{distance,jdbcType=VARCHAR}, #{calorie,jdbcType=VARCHAR}, #{heartrate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddjc.entity.Databracelet" >
+    insert into DataBracelet
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceid != null" >
+        deviceId,
+      </if>
+      <if test="deletemark != null" >
+        deleteMark,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="steps != null" >
+        steps,
+      </if>
+      <if test="distance != null" >
+        distance,
+      </if>
+      <if test="calorie != null" >
+        calorie,
+      </if>
+      <if test="heartrate != null" >
+        heartRate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceid != null" >
+        #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletemark != null" >
+        #{deletemark,jdbcType=TINYINT},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="steps != null" >
+        #{steps,jdbcType=VARCHAR},
+      </if>
+      <if test="distance != null" >
+        #{distance,jdbcType=VARCHAR},
+      </if>
+      <if test="calorie != null" >
+        #{calorie,jdbcType=VARCHAR},
+      </if>
+      <if test="heartrate != null" >
+        #{heartrate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddjc.entity.Databracelet" >
+    update DataBracelet
+    <set >
+      <if test="deviceid != null" >
+        deviceId = #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletemark != null" >
+        deleteMark = #{deletemark,jdbcType=TINYINT},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="steps != null" >
+        steps = #{steps,jdbcType=VARCHAR},
+      </if>
+      <if test="distance != null" >
+        distance = #{distance,jdbcType=VARCHAR},
+      </if>
+      <if test="calorie != null" >
+        calorie = #{calorie,jdbcType=VARCHAR},
+      </if>
+      <if test="heartrate != null" >
+        heartRate = #{heartrate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddjc.entity.Databracelet" >
+    update DataBracelet
+    set deviceId = #{deviceid,jdbcType=VARCHAR},
+      deleteMark = #{deletemark,jdbcType=TINYINT},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      steps = #{steps,jdbcType=VARCHAR},
+      distance = #{distance,jdbcType=VARCHAR},
+      calorie = #{calorie,jdbcType=VARCHAR},
+      heartRate = #{heartrate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

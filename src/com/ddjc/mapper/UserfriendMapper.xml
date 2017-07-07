@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddjc.dao.UserfriendMapper" >
+  <resultMap id="BaseResultMap" type="com.ddjc.entity.Userfriend" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="VARCHAR" />
+    <result column="friendId" property="friendid" jdbcType="VARCHAR" />
+    <result column="relationMark" property="relationmark" jdbcType="VARCHAR" />
+    <result column="logoId" property="logoid" jdbcType="VARCHAR" />
+    <result column="deleteMark" property="deletemark" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="BaseResultModelMap" type="com.ddjc.entity.appmodel.FriendModel" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="userId" property="userId" jdbcType="VARCHAR" />
+    <result column="friendId" property="friendId" jdbcType="VARCHAR" />
+    <result column="relationMark" property="relationMark" jdbcType="VARCHAR" />
+    <result column="fidLogoId" property="fidLogoId" jdbcType="VARCHAR" />
+    <result column="fidCode" property="fidCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userId, friendId, relationMark, logoId, deleteMark
+  </sql>
+  <sql id="Base_ColumnModel_List" >
+    uf.id as id, uf.userId as userId, uf.friendId as friendId, uf.relationMark as relationMark, uf.logoId as fidLogoId, u.userCode as fidCode 
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from UserFriend
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from UserFriend
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ddjc.entity.Userfriend" >
+    insert into UserFriend (id, userId, friendId, 
+      relationMark, logoId, deleteMark
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{friendid,jdbcType=VARCHAR}, 
+      #{relationmark,jdbcType=VARCHAR}, #{logoid,jdbcType=VARCHAR}, #{deletemark,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddjc.entity.Userfriend" >
+    insert into UserFriend
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="friendid != null" >
+        friendId,
+      </if>
+      <if test="relationmark != null" >
+        relationMark,
+      </if>
+      <if test="logoid != null" >
+        logoId,
+      </if>
+      <if test="deletemark != null" >
+        deleteMark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="friendid != null" >
+        #{friendid,jdbcType=VARCHAR},
+      </if>
+      <if test="relationmark != null" >
+        #{relationmark,jdbcType=VARCHAR},
+      </if>
+      <if test="logoid != null" >
+        #{logoid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletemark != null" >
+        #{deletemark,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddjc.entity.Userfriend" >
+    update UserFriend
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="friendid != null" >
+        friendId = #{friendid,jdbcType=VARCHAR},
+      </if>
+      <if test="relationmark != null" >
+        relationMark = #{relationmark,jdbcType=VARCHAR},
+      </if>
+      <if test="logoid != null" >
+        logoId = #{logoid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletemark != null" >
+        deleteMark = #{deletemark,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddjc.entity.Userfriend" >
+    update UserFriend
+    set userId = #{userid,jdbcType=VARCHAR},
+      friendId = #{friendid,jdbcType=VARCHAR},
+      relationMark = #{relationmark,jdbcType=VARCHAR},
+      logoId = #{logoid,jdbcType=VARCHAR},
+      deleteMark = #{deletemark,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="findByIds" resultMap="BaseResultMap" parameterType="com.ddjc.entity.Userfriend" >
+    select 
+    <include refid="Base_Column_List" />
+    from UserFriend
+    where userId = #{userid} and friendId=#{friendid}
+  </select>
+  
+  <select id="getMyFamilyList" resultMap="BaseResultModelMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_ColumnModel_List" />
+    from UserFriend uf,User u
+    where uf.userId = #{userid} and uf.friendId=u.id
+  </select>
+</mapper>

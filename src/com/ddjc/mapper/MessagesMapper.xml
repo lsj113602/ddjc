@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddjc.dao.MessagesMapper" >
+  <resultMap id="BaseResultMap" type="com.ddjc.entity.Messages" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="userID" property="userid" jdbcType="VARCHAR" />
+    <result column="sendUserId" property="senduserid" jdbcType="VARCHAR" />
+    <result column="messageType" property="messagetype" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="sendTime" property="sendtime" jdbcType="TIMESTAMP" />
+    <result column="isRead" property="isread" jdbcType="TINYINT" />
+    <result column="deleteMark" property="deletemark" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ddjc.entity.Messages" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BaseResultModelMap" type="com.ddjc.entity.appmodel.MessagesModel" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="sendUser" property="sendUser" jdbcType="VARCHAR" />
+    <result column="messageType" property="messageType" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="sendTime" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="isRead" property="isRead" jdbcType="TINYINT" />
+  </resultMap>
+  
+  <sql id="Base_ColumnModel_List" >
+    m.id as id,  u.userName as sendUser, m.messageType as messageType, m.title as title, m.content as content, m.sendTime as sendTime, m.isRead as isRead 
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userID, sendUserId, messageType, title, sendTime, isRead, deleteMark
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Messages
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from Messages
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ddjc.entity.Messages" >
+    insert into Messages (id, userID, sendUserId, 
+      messageType, title, sendTime, 
+      isRead, deleteMark, content
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{senduserid,jdbcType=VARCHAR}, 
+      #{messagetype,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, 
+      #{isread,jdbcType=TINYINT}, #{deletemark,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddjc.entity.Messages" >
+    insert into Messages
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="senduserid != null" >
+        sendUserId,
+      </if>
+      <if test="messagetype != null" >
+        messageType,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="sendtime != null" >
+        sendTime,
+      </if>
+      <if test="isread != null" >
+        isRead,
+      </if>
+      <if test="deletemark != null" >
+        deleteMark,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="senduserid != null" >
+        #{senduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null" >
+        #{messagetype,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isread != null" >
+        #{isread,jdbcType=TINYINT},
+      </if>
+      <if test="deletemark != null" >
+        #{deletemark,jdbcType=TINYINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddjc.entity.Messages" >
+    update Messages
+    <set >
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="senduserid != null" >
+        sendUserId = #{senduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null" >
+        messageType = #{messagetype,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isread != null" >
+        isRead = #{isread,jdbcType=TINYINT},
+      </if>
+      <if test="deletemark != null" >
+        deleteMark = #{deletemark,jdbcType=TINYINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ddjc.entity.Messages" >
+    update Messages
+    set userID = #{userid,jdbcType=VARCHAR},
+      sendUserId = #{senduserid,jdbcType=VARCHAR},
+      messageType = #{messagetype,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      isRead = #{isread,jdbcType=TINYINT},
+      deleteMark = #{deletemark,jdbcType=TINYINT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddjc.entity.Messages" >
+    update Messages
+    set userID = #{userid,jdbcType=VARCHAR},
+      sendUserId = #{senduserid,jdbcType=VARCHAR},
+      messageType = #{messagetype,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      isRead = #{isread,jdbcType=TINYINT},
+      deleteMark = #{deletemark,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getMessage" resultMap="BaseResultModelMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_ColumnModel_List" />
+    from Messages m,User u
+    where m.userID = #{id} and m.sendUserId=u.Id
+    <if test="type==1">
+        and m.messageType=1
+    </if>
+    <if test="type==0">
+        and m.messageType=0
+    </if>
+    <if test="state==0">
+        and m.isRead=0
+    </if>
+    <if test="state==1">
+        and m.isRead=1
+    </if>
+  </select>
+  
+  <update id="readMessage" parameterType="java.lang.String" >
+    update Messages
+    set isRead = 1 
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

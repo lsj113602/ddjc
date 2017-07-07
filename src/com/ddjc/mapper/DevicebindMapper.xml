@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddjc.dao.DevicebindMapper" >
+  <resultMap id="BaseResultMap" type="com.ddjc.entity.Devicebind" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="VARCHAR" />
+    <result column="deviceId" property="deviceid" jdbcType="VARCHAR" />
+    <result column="bindTime" property="bindtime" jdbcType="TIMESTAMP" />
+    <result column="unBindTime" property="unbindtime" jdbcType="TIMESTAMP" />
+    <result column="isBind" property="isbind" jdbcType="TINYINT" />
+    <result column="deleteMark" property="deletemark" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userId, deviceId, bindTime, unBindTime, isBind, deleteMark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DeviceBind
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DeviceBind
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ddjc.entity.Devicebind" >
+    insert into DeviceBind (id, userId, deviceId, 
+      bindTime, unBindTime, isBind, 
+      deleteMark)
+    values (#{id,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{deviceid,jdbcType=VARCHAR}, 
+      #{bindtime,jdbcType=TIMESTAMP}, #{unbindtime,jdbcType=TIMESTAMP}, #{isbind,jdbcType=TINYINT}, 
+      #{deletemark,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddjc.entity.Devicebind" >
+    insert into DeviceBind
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="deviceid != null" >
+        deviceId,
+      </if>
+      <if test="bindtime != null" >
+        bindTime,
+      </if>
+      <if test="unbindtime != null" >
+        unBindTime,
+      </if>
+      <if test="isbind != null" >
+        isBind,
+      </if>
+      <if test="deletemark != null" >
+        deleteMark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceid != null" >
+        #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="bindtime != null" >
+        #{bindtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unbindtime != null" >
+        #{unbindtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isbind != null" >
+        #{isbind,jdbcType=TINYINT},
+      </if>
+      <if test="deletemark != null" >
+        #{deletemark,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddjc.entity.Devicebind" >
+    update DeviceBind
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceid != null" >
+        deviceId = #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="bindtime != null" >
+        bindTime = #{bindtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unbindtime != null" >
+        unBindTime = #{unbindtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isbind != null" >
+        isBind = #{isbind,jdbcType=TINYINT},
+      </if>
+      <if test="deletemark != null" >
+        deleteMark = #{deletemark,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddjc.entity.Devicebind" >
+    update DeviceBind
+    set userId = #{userid,jdbcType=VARCHAR},
+      deviceId = #{deviceid,jdbcType=VARCHAR},
+      bindTime = #{bindtime,jdbcType=TIMESTAMP},
+      unBindTime = #{unbindtime,jdbcType=TIMESTAMP},
+      isBind = #{isbind,jdbcType=TINYINT},
+      deleteMark = #{deletemark,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

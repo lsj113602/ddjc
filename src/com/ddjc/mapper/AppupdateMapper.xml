@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddjc.dao.AppupdateMapper" >
+  <resultMap id="BaseResultMap" type="com.ddjc.entity.Appupdate" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="typeId" property="typeid" jdbcType="TINYINT" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="downLoadUrl" property="downloadurl" jdbcType="VARCHAR" />
+    <result column="isForce" property="isforce" jdbcType="TINYINT" />
+    <result column="isPrompt" property="isprompt" jdbcType="TINYINT" />
+    <result column="deleteMark" property="deletemark" jdbcType="TINYINT" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ddjc.entity.Appupdate" >
+    insert into AppUpdate (id, typeId, version, 
+      downLoadUrl, isForce, isPrompt, 
+      deleteMark)
+    values (#{id,jdbcType=VARCHAR}, #{typeid,jdbcType=TINYINT}, #{version,jdbcType=VARCHAR}, 
+      #{downloadurl,jdbcType=VARCHAR}, #{isforce,jdbcType=TINYINT}, #{isprompt,jdbcType=TINYINT}, 
+      #{deletemark,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddjc.entity.Appupdate" >
+    insert into AppUpdate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="typeid != null" >
+        typeId,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="downloadurl != null" >
+        downLoadUrl,
+      </if>
+      <if test="isforce != null" >
+        isForce,
+      </if>
+      <if test="isprompt != null" >
+        isPrompt,
+      </if>
+      <if test="deletemark != null" >
+        deleteMark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=TINYINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadurl != null" >
+        #{downloadurl,jdbcType=VARCHAR},
+      </if>
+      <if test="isforce != null" >
+        #{isforce,jdbcType=TINYINT},
+      </if>
+      <if test="isprompt != null" >
+        #{isprompt,jdbcType=TINYINT},
+      </if>
+      <if test="deletemark != null" >
+        #{deletemark,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

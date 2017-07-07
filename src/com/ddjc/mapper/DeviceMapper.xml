@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddjc.dao.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.ddjc.entity.Device" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="brandModelID" property="brandmodelid" jdbcType="VARCHAR" />
+    <result column="categoryName" property="categoryname" jdbcType="VARCHAR" />
+    <result column="madeBy" property="madeby" jdbcType="VARCHAR" />
+    <result column="MacAddress" property="macaddress" jdbcType="VARCHAR" />
+    <result column="ReMark" property="remark" jdbcType="VARCHAR" />
+    <result column="DeleteMark" property="deletemark" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, brandModelID, categoryName, madeBy, MacAddress, ReMark, DeleteMark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from Device
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from Device
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ddjc.entity.Device" >
+    insert into Device (id, brandModelID, categoryName, 
+      madeBy, MacAddress, ReMark, 
+      DeleteMark)
+    values (#{id,jdbcType=VARCHAR}, #{brandmodelid,jdbcType=VARCHAR}, #{categoryname,jdbcType=VARCHAR}, 
+      #{madeby,jdbcType=VARCHAR}, #{macaddress,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{deletemark,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddjc.entity.Device" >
+    insert into Device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="brandmodelid != null" >
+        brandModelID,
+      </if>
+      <if test="categoryname != null" >
+        categoryName,
+      </if>
+      <if test="madeby != null" >
+        madeBy,
+      </if>
+      <if test="macaddress != null" >
+        MacAddress,
+      </if>
+      <if test="remark != null" >
+        ReMark,
+      </if>
+      <if test="deletemark != null" >
+        DeleteMark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="brandmodelid != null" >
+        #{brandmodelid,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryname != null" >
+        #{categoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="madeby != null" >
+        #{madeby,jdbcType=VARCHAR},
+      </if>
+      <if test="macaddress != null" >
+        #{macaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletemark != null" >
+        #{deletemark,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddjc.entity.Device" >
+    update Device
+    <set >
+      <if test="brandmodelid != null" >
+        brandModelID = #{brandmodelid,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryname != null" >
+        categoryName = #{categoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="madeby != null" >
+        madeBy = #{madeby,jdbcType=VARCHAR},
+      </if>
+      <if test="macaddress != null" >
+        MacAddress = #{macaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        ReMark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletemark != null" >
+        DeleteMark = #{deletemark,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddjc.entity.Device" >
+    update Device
+    set brandModelID = #{brandmodelid,jdbcType=VARCHAR},
+      categoryName = #{categoryname,jdbcType=VARCHAR},
+      madeBy = #{madeby,jdbcType=VARCHAR},
+      MacAddress = #{macaddress,jdbcType=VARCHAR},
+      ReMark = #{remark,jdbcType=VARCHAR},
+      DeleteMark = #{deletemark,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

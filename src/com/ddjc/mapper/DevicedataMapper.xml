@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddjc.dao.DevicedataMapper" >
+  <resultMap id="BaseResultMap" type="com.ddjc.entity.Devicedata" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="funcName" property="funcname" jdbcType="VARCHAR" />
+    <result column="requestTime" property="requesttime" jdbcType="TIMESTAMP" />
+    <result column="result" property="result" jdbcType="TINYINT" />
+    <result column="deleteMark" property="deletemark" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ddjc.entity.DevicedataWithBLOBs" extends="BaseResultMap" >
+    <result column="requestParam" property="requestparam" jdbcType="LONGVARCHAR" />
+    <result column="response" property="response" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, funcName, requestTime, result, deleteMark
+  </sql>
+  <sql id="Blob_Column_List" >
+    requestParam, response
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from DeviceData
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DeviceData
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ddjc.entity.DevicedataWithBLOBs" >
+    insert into DeviceData (id, funcName, requestTime, 
+      result, deleteMark, requestParam, 
+      response)
+    values (#{id,jdbcType=VARCHAR}, #{funcname,jdbcType=VARCHAR}, #{requesttime,jdbcType=TIMESTAMP}, 
+      #{result,jdbcType=TINYINT}, #{deletemark,jdbcType=TINYINT}, #{requestparam,jdbcType=LONGVARCHAR}, 
+      #{response,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddjc.entity.DevicedataWithBLOBs" >
+    insert into DeviceData
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="funcname != null" >
+        funcName,
+      </if>
+      <if test="requesttime != null" >
+        requestTime,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="deletemark != null" >
+        deleteMark,
+      </if>
+      <if test="requestparam != null" >
+        requestParam,
+      </if>
+      <if test="response != null" >
+        response,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="funcname != null" >
+        #{funcname,jdbcType=VARCHAR},
+      </if>
+      <if test="requesttime != null" >
+        #{requesttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=TINYINT},
+      </if>
+      <if test="deletemark != null" >
+        #{deletemark,jdbcType=TINYINT},
+      </if>
+      <if test="requestparam != null" >
+        #{requestparam,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="response != null" >
+        #{response,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddjc.entity.DevicedataWithBLOBs" >
+    update DeviceData
+    <set >
+      <if test="funcname != null" >
+        funcName = #{funcname,jdbcType=VARCHAR},
+      </if>
+      <if test="requesttime != null" >
+        requestTime = #{requesttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=TINYINT},
+      </if>
+      <if test="deletemark != null" >
+        deleteMark = #{deletemark,jdbcType=TINYINT},
+      </if>
+      <if test="requestparam != null" >
+        requestParam = #{requestparam,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="response != null" >
+        response = #{response,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ddjc.entity.DevicedataWithBLOBs" >
+    update DeviceData
+    set funcName = #{funcname,jdbcType=VARCHAR},
+      requestTime = #{requesttime,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=TINYINT},
+      deleteMark = #{deletemark,jdbcType=TINYINT},
+      requestParam = #{requestparam,jdbcType=LONGVARCHAR},
+      response = #{response,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddjc.entity.Devicedata" >
+    update DeviceData
+    set funcName = #{funcname,jdbcType=VARCHAR},
+      requestTime = #{requesttime,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=TINYINT},
+      deleteMark = #{deletemark,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

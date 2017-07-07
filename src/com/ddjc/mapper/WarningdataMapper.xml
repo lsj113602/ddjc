@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ddjc.dao.WarningdataMapper" >
+  <resultMap id="BaseResultMap" type="com.ddjc.entity.Warningdata" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="receiveTime" property="receivetime" jdbcType="TIMESTAMP" />
+    <result column="deleteMark" property="deletemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ddjc.entity.Warningdata" extends="BaseResultMap" >
+    <result column="receiveData" property="receivedata" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, receiveTime, deleteMark
+  </sql>
+  <sql id="Blob_Column_List" >
+    receiveData
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from WarningData
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from WarningData
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ddjc.entity.Warningdata" >
+    insert into WarningData (id, receiveTime, deleteMark, 
+      receiveData)
+    values (#{id,jdbcType=VARCHAR}, #{receivetime,jdbcType=TIMESTAMP}, #{deletemark,jdbcType=VARCHAR}, 
+      #{receivedata,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddjc.entity.Warningdata" >
+    insert into WarningData
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="receivetime != null" >
+        receiveTime,
+      </if>
+      <if test="deletemark != null" >
+        deleteMark,
+      </if>
+      <if test="receivedata != null" >
+        receiveData,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="receivetime != null" >
+        #{receivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletemark != null" >
+        #{deletemark,jdbcType=VARCHAR},
+      </if>
+      <if test="receivedata != null" >
+        #{receivedata,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddjc.entity.Warningdata" >
+    update WarningData
+    <set >
+      <if test="receivetime != null" >
+        receiveTime = #{receivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletemark != null" >
+        deleteMark = #{deletemark,jdbcType=VARCHAR},
+      </if>
+      <if test="receivedata != null" >
+        receiveData = #{receivedata,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ddjc.entity.Warningdata" >
+    update WarningData
+    set receiveTime = #{receivetime,jdbcType=TIMESTAMP},
+      deleteMark = #{deletemark,jdbcType=VARCHAR},
+      receiveData = #{receivedata,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddjc.entity.Warningdata" >
+    update WarningData
+    set receiveTime = #{receivetime,jdbcType=TIMESTAMP},
+      deleteMark = #{deletemark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
