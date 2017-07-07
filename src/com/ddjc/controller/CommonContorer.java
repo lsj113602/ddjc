@@ -33,6 +33,7 @@ public class CommonContorer {
         app.setData(list);   ////    
         
         return app;
+        
 	}
 	
 	@ResponseBody
