@@ -6,4 +6,5 @@ public interface AppupdateMapper {
     int insert(Appupdate record);
 
     int insertSelective(Appupdate record);
+
 }
