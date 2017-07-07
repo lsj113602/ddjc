@@ -30,7 +30,7 @@ public class CommonContorer {
     	List<MessagesModel> list=commonservice.getMessage(id,type,state);
         app.setCode(0);
         app.setMsg("²Ù×÷³É¹¦");
-        app.setData(list);        	
+        app.setData(list);   ////     	
         return app;
 	}
 	
