@@ -1,6 +1,5 @@
 package com.ddjc.service;
 
-import com.ddjc.basic.service.service.BasicService;
 import com.ddjc.entity.User;
 
 public interface UserService{
@@ -11,5 +10,7 @@ public interface UserService{
 	public User findUserById(String id);
 
 	public User findUserBycode(String firendcode);
+
+	public void updateUser(User user);
 
 }

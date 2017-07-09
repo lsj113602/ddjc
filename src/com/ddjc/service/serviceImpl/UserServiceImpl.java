@@ -1,12 +1,10 @@
 package com.ddjc.service.serviceImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.ddjc.basic.service.Impl.BasicServiceImpl;
 import com.ddjc.dao.UserMapper;
 import com.ddjc.entity.User;
 import com.ddjc.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 @Service("UserService")
 public class UserServiceImpl implements UserService {
 	@Autowired
@@ -29,5 +27,10 @@ public class UserServiceImpl implements UserService {
 	}
 	public User findUserBycode(String firendcode){
 		return usermapper.findUserBycode(firendcode);
+	}
+
+	@Override
+	public void updateUser(User user) {
+		usermapper.updateByPrimaryKeySelective(user);
 	}
 }
