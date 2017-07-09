@@ -1,8 +1,9 @@
 package com.ddjc.service;
 
-import java.util.List;
-
+import com.ddjc.entity.Appupdate;
 import com.ddjc.entity.appmodel.MessagesModel;
+
+import java.util.List;
 
 public interface CommonService {
 
@@ -10,4 +11,5 @@ public interface CommonService {
 
 	int readMessage(String id, String uid);
 
+	Appupdate getLatestVersion(int type);
 }

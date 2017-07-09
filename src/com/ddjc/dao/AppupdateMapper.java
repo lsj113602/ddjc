@@ -7,4 +7,5 @@ public interface AppupdateMapper {
 
     int insertSelective(Appupdate record);
 
+    Appupdate selectLatestRawByType(int type);
 }

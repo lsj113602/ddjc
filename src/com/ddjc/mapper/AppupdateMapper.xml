@@ -10,6 +10,9 @@
     <result column="isPrompt" property="isprompt" jdbcType="TINYINT" />
     <result column="deleteMark" property="deletemark" jdbcType="TINYINT" />
   </resultMap>
+  <select id="selectLatestRawByType" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT * from AppUpdate WHERE typeId = #{type} ORDER BY id desc LIMIT 0,1;
+  </select>
   <insert id="insert" parameterType="com.ddjc.entity.Appupdate" >
     insert into AppUpdate (id, typeId, version, 
       downLoadUrl, isForce, isPrompt, 
