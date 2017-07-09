@@ -29,7 +29,7 @@ public class StaticController {
     public ResponseEntity<byte[]> uploads(@PathVariable("fileName") String fileName,
                                           @PathVariable("ext") String ext) throws IOException {
         String ym = DateFormatUtils.format(Calendar.getInstance().getTime(), "yyyyMM");
-        String path = "D:\\uploads";
+        String path = "F:\\uploads";
         path += "\\" + ym + "_" + fileName + "." + ext;
         File file = new File(path);
         if (!file.exists()) {
@@ -43,5 +43,20 @@ public class StaticController {
             headers.setContentType(MediaType.IMAGE_JPEG);
         }
         return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/qrcode/{fileName}.{ext}", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> qrcode(@PathVariable("fileName") String fileName,
+                                          @PathVariable("ext") String ext) throws IOException {
+        String path = "F:\\uploads\\qrcode\\";
+        path += fileName + "." + ext;
+        File file = new File(path);
+        if (!file.exists()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        byte[] bytes = FileUtil.toByteArray(file);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+        return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
     }
 }

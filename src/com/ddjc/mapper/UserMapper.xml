@@ -27,6 +27,11 @@
     from User
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from User
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from User
     where id = #{id,jdbcType=VARCHAR}

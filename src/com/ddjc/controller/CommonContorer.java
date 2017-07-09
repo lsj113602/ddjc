@@ -17,46 +17,46 @@ import java.util.List;
 @Controller
 @RequestMapping("/common")
 public class CommonContorer {
-    private static final int VERSION_ANDROID = 0;
-    private static final int VERSION_IOS = 1;
+	private static final int VERSION_ANDROID = 0;
+	private static final int VERSION_IOS = 1;
 
 	@Autowired
-	private CommonService commonservice;
-	
+	private CommonService commonService;
+
 	@ResponseBody
-    @RequestMapping(value = "/getMessage")
-	public AppJsonMessage getMessage(String data){	
-    	AppJsonMessage app=new AppJsonMessage();
-    	JSONObject jsonObj = JSON.parseObject(data);
-    	String id=jsonObj.getString("id");
-    	String type=jsonObj.getString("type");
-    	String state=jsonObj.getString("state");
-    	List<MessagesModel> list=commonservice.getMessage(id,type,state);
-        app.setCode(0);
-        app.setMsg("操作成功");
-        app.setData(list);   ////    
-        return app;
+	@RequestMapping(value = "/getMessage")
+	public AppJsonMessage getMessage(String data){
+		AppJsonMessage app=new AppJsonMessage();
+		JSONObject jsonObj = JSON.parseObject(data);
+		String id=jsonObj.getString("id");
+		String type=jsonObj.getString("type");
+		String state=jsonObj.getString("state");
+		List<MessagesModel> list= commonService.getMessage(id,type,state);
+		app.setCode(0);
+		app.setMsg("操作成功");
+		app.setData(list);   ////
+		return app;
 	}
-	
+
 	@ResponseBody
-    @RequestMapping(value = "/readMessage")
-	public AppJsonMessage readMessage(String data){	
-    	AppJsonMessage app=new AppJsonMessage();
-    	JSONObject jsonObj = JSON.parseObject(data);
-    	String id=jsonObj.getString("id");
-    	String uid=jsonObj.getString("uid");
-    	int mark=commonservice.readMessage(id,uid);
-    	if(mark>0){
-            app.setCode(0);
-            app.setMsg("操作成功");
-            app.setData("");
-    	}
-    	else{
-    		app.setCode(1008);
-            app.setMsg("操作失败");
-            app.setData("");
-    	}
-        return app;
+	@RequestMapping(value = "/readMessage")
+	public AppJsonMessage readMessage(String data){
+		AppJsonMessage app=new AppJsonMessage();
+		JSONObject jsonObj = JSON.parseObject(data);
+		String id=jsonObj.getString("id");
+		String uid=jsonObj.getString("uid");
+		int mark= commonService.readMessage(id,uid);
+		if(mark>0){
+			app.setCode(0);
+			app.setMsg("操作成功");
+			app.setData("");
+		}
+		else{
+			app.setCode(1008);
+			app.setMsg("操作失败");
+			app.setData("");
+		}
+		return app;
 	}
 
 	@ResponseBody
@@ -64,12 +64,12 @@ public class CommonContorer {
 	public AppJsonMessage getLatestVersion(String data){
 		AppJsonMessage app=new AppJsonMessage();
 		JSONObject jsonObj = JSON.parseObject(data);
-        int type = jsonObj.getIntValue("type");
-        Appupdate latestVersion = commonservice.getLatestVersion(type);
-        if(latestVersion != null){
-            return ResultUtil.success(latestVersion);
-        }else {
-            return ResultUtil.failed(1001,"服务器错误");
-        }
+		int type = jsonObj.getIntValue("type");
+		Appupdate latestVersion = commonService.getLatestVersion(type);
+		if(latestVersion != null){
+			return ResultUtil.success(latestVersion);
+		}else {
+			return ResultUtil.failed(1001,"服务器错误");
+		}
 	}
 }

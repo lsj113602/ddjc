@@ -2,6 +2,8 @@ package com.ddjc.dao;
 
 import com.ddjc.entity.User;
 
+import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(String id);
 
@@ -19,4 +21,5 @@ public interface UserMapper {
 
 	User findUserBycode(String usercode);
 
+    List<User> selectAll();
 }

@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -79,6 +80,23 @@ public class UserController {
     }
 
     /**
+     * 改方法
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/createQrCode")
+    public AppJsonMessage createQrCode(String data) throws IOException, WriterException {
+        List<User> list = userservice.selectAll();
+        QrcodeTool tool = new QrcodeTool();
+        String path = "F:\\uploads\\qrcode\\";
+        for (User user: list){
+            String qrpath = tool.toBufferedImage(path, user.getId() + ".png", user.getUsercode(), 150, 150);
+            user.setUserqrcode(qrpath);
+            userservice.updateUser(user);
+        }
+        return new AppJsonMessage();
+    }
+    /**
      * 注册
      *
      * @param session
@@ -90,7 +108,9 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/register")
     public AppJsonMessage Register(String data, HttpSession session) throws WriterException, IOException {
-        String path = session.getServletContext().getRealPath("/");
+//        String path = session.getServletContext().getRealPath("/");
+        String path = "F:\\uploads\\qrcode\\";
+
         AppJsonMessage app = new AppJsonMessage();
         JSONObject jsonObj = JSON.parseObject(data);
         //Object param = JSON.parseObject(data, Object.class);
@@ -173,8 +193,9 @@ public class UserController {
     @RequestMapping(value = "/qrcode")
     public AppJsonMessage Qrcode(HttpSession session, String data) throws WriterException, IOException {
         //	ServletActionContext.getRequest().getSession().setAttribute("sessionUser", user);
-        AppJsonMessage app = new AppJsonMessage();
+
         String path = session.getServletContext().getRealPath("/");
+        AppJsonMessage app = new AppJsonMessage();
         QrcodeTool tool = new QrcodeTool();
         String qrpath = tool.toBufferedImage(path, "123.png", "lsj11111", 100, 100);
         app.setCode(0);
@@ -285,7 +306,7 @@ public class UserController {
                         //重命名上传后的文件名
                         fileName = file.getOriginalFilename();
                         //定义上传路径
-                        String path = "D:\\uploads";
+                        String path = "F:\\uploads";
                         File dir = new File(path);
                         if (!dir.exists()) dir.mkdirs();
                         path += "\\" + ym + "_" + fileName;
@@ -297,6 +318,6 @@ public class UserController {
         } else {
             return ResultUtil.failed(2040, "没有文件");
         }
-        return ResultUtil.success(new JSONObject().put("userLogo","/uploads/" + ym + "_" + fileName));
+        return ResultUtil.success(new JSONObject().put("userLogo", "/uploads/" + ym + "_" + fileName));
     }
 }

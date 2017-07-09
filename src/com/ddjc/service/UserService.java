@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.ddjc.entity.User;
 import com.ddjc.entity.Userfeedback;
 
+import java.util.List;
+
 public interface UserService{
 	public int insertUser(User user);
 
@@ -18,4 +20,7 @@ public interface UserService{
 	public int insertFeedBack(Userfeedback userfeedback);
 
 	JSONObject modifyPsw(String userCode, String oldPassword, String newPassword, String newPassword1);
+
+    List<User> selectAll();
+
 }

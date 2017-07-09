@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service("CommonService")
+@Service("commonService")
 public class CommonServiceImpl implements CommonService{
 	@Autowired
 	private MessagesMapper messagesmapper;
@@ -17,12 +17,14 @@ public class CommonServiceImpl implements CommonService{
 	@Autowired
 	private AppupdateMapper appupdateMapper;
 
+	@Override
 	public List<MessagesModel> getMessage(String id, String type1, String state1){
 		int state=Integer.parseInt(state1);
 		int type=Integer.parseInt(type1);
 		return messagesmapper.getMessage(id,type,state);		
 	}
-	
+
+	@Override
 	public int readMessage(String id, String uid){
 		return messagesmapper.readMessage(id);
 	}
