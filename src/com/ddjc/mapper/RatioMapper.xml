@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddjc.dao.RatioMapper">
+  <resultMap id="BaseResultMap" type="com.ddjc.entity.Ratio">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="deviceId" jdbcType="INTEGER" property="deviceid" />
+    <result column="value" jdbcType="REAL" property="value" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, deviceId, value, createTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ratio
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectLastRow" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    from ratio ORDER BY id DESC LIMIT 0,10
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ratio
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ddjc.entity.Ratio">
+    insert into ratio (id, deviceId, value, 
+      createTime)
+    values (#{id,jdbcType=INTEGER}, #{deviceid,jdbcType=INTEGER}, #{value,jdbcType=REAL}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddjc.entity.Ratio">
+    insert into ratio
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deviceid != null">
+        deviceId,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceid != null">
+        #{deviceid,jdbcType=INTEGER},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=REAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddjc.entity.Ratio">
+    update ratio
+    <set>
+      <if test="deviceid != null">
+        deviceId = #{deviceid,jdbcType=INTEGER},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=REAL},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddjc.entity.Ratio">
+    update ratio
+    set deviceId = #{deviceid,jdbcType=INTEGER},
+      value = #{value,jdbcType=REAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

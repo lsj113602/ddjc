@@ -173,14 +173,14 @@
     select 
     <include refid="Base_ColumnModel_List" />
     from WarningUntreated wu,NurseUser nu,User u
-    where nu.nurseId = #{id} and nu.userId=wu.userId and wu.userId=u.id
+    where nu.nurseId = #{id} and nu.userId=wu.userId and wu.userId=u.id order by receiveTime desc
   </select>
   
   <select id="findWarningByUser" resultMap="BaseResultModelMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_ColumnModel_List" />
     from WarningUntreated wu,UserFriend uf,User u
-    where uf.userId = #{id} and uf.friendId=wu.userId and wu.userId=u.id
+    where uf.userId = #{id} and uf.friendId=wu.userId and wu.userId=u.id order by receiveTime desc
   </select>
   
   <update id="updateRemarks" parameterType="java.util.Map" >
