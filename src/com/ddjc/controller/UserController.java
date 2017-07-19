@@ -318,6 +318,8 @@ public class UserController {
         } else {
             return ResultUtil.failed(2040, "没有文件");
         }
-        return ResultUtil.success(new JSONObject().put("userLogo", "/uploads/" + ym + "_" + fileName));
+        JSONObject userLogo = new JSONObject();
+        userLogo.put("userLogo", "/uploads/" + ym + "_" + fileName);
+        return ResultUtil.success(userLogo.toString());
     }
 }
